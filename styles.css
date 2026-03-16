@@ -1,9 +1,9 @@
 :root {
-    /* Spotify Dark Theme Colors */
+    /* Theme Colors */
     --bg-dark: #121212;
     --bg-panel: #181818;
     --bg-panel-hover: #282828;
-    --accent-gold: #1db954; /* Keeping variable name but changing to Spotify Green */
+    --accent-gold: #1db954; 
     --accent-gold-hover: #1ed760;
     --accent-glow: transparent;
     
@@ -41,27 +41,20 @@ body {
     overflow: hidden;
 }
 
-/* =====================
-   Scrollbars
-   ===================== */
+/* Scrollbars */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #555; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
 
-/* =====================
-   Layout Structure
-   app-wrapper fills screen; sidebar fixed left, main-area scrolls
-   ===================== */
+/* Layout Structure */
 .app-wrapper {
     display: flex;
     height: 100dvh;
     overflow: hidden;
 }
 
-/* =====================
-   Sidebar
-   ===================== */
+/* Sidebar */
 .sidebar {
     width: var(--sidebar-width);
     flex-shrink: 0;
@@ -361,9 +354,7 @@ body {
     font-weight: 600;
 }
 
-/* =====================
-   Mobile Overlay
-   ===================== */
+/* Mobile Overlay */
 .sidebar-overlay {
     display: none;
     position: fixed;
@@ -376,9 +367,7 @@ body {
     display: block;
 }
 
-/* =====================
-   Main Area (right of sidebar)
-   ===================== */
+/* Main Area (right of sidebar) */
 .main-area {
     flex: 1;
     display: flex;
@@ -388,9 +377,7 @@ body {
     overflow: hidden;
 }
 
-/* =====================
-   Main Content (top bar + scrollable body)
-   ===================== */
+/* Main Content (top bar + scrollable body) */
 .main-content {
     flex: 1;
     display: flex;
@@ -539,9 +526,7 @@ body {
     color: var(--text-secondary);
 }
 
-/* =====================
-   Grids and Cards
-   ===================== */
+/* Grids and Cards */
 .audio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -551,7 +536,7 @@ body {
 .audio-card {
     background: #181818;
     border: none;
-    border-radius: 8px; /* Spotify style sharper radius */
+    border-radius: 8px; 
     padding: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -732,7 +717,7 @@ body {
 
 .play-overlay {
     position: absolute;
-    bottom: 8px; right: 8px; /* Spotify play button sits bottom right of album art */
+    bottom: 8px; right: 8px; 
     transform: translateY(8px);
     width: 48px; height: 48px;
     background: var(--accent-gold); /* Spotify green */
@@ -751,7 +736,7 @@ body {
 }
 
 .card-info h4 {
-    font-size: 14px; /* Slightly larger like Spotify track titles */
+    font-size: 14px; 
     font-weight: 700;
     margin-bottom: 6px;
     color: var(--text-primary);
@@ -760,7 +745,7 @@ body {
     text-overflow: ellipsis;
 }
 .card-info p {
-    font-size: 13px; /* Slightly larger subtitles */
+    font-size: 13px; 
     font-weight: 500;
     color: var(--text-muted);
     margin-bottom: 8px;
@@ -794,9 +779,7 @@ body {
 .no-results p { font-size: 15px; }
 .hidden { display: none !important; }
 
-/* =====================
-   Player Bar
-   ===================== */
+/* Player Bar */
 .player-bar {
     height: var(--player-height);
     flex-shrink: 0;
@@ -978,9 +961,7 @@ body {
 }
 .volume-slider-bg:hover .volume-slider-fill { background: var(--accent-gold); }
 
-/* =====================
-   Modals
-   ===================== */
+/* Modals */
 .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -1095,9 +1076,7 @@ body {
     border-top: 1px solid var(--border-color);
 }
 
-/* =====================
-   Buttons
-   ===================== */
+/* Buttons */
 .btn-text {
     background: none;
     border: none;
@@ -1136,9 +1115,7 @@ body {
 }
 .btn-primary:hover { background: var(--accent-gold-hover); }
 
-/* =====================
-   Responsive: Tablet (≤1024px)
-   ===================== */
+/* Responsive: Tablet (≤1024px) */
 @media (max-width: 1024px) {
     :root {
         --sidebar-width: 220px;
@@ -1148,9 +1125,7 @@ body {
     }
 }
 
-/* =====================
-   Responsive: Mobile (≤768px)
-   ===================== */
+/* Responsive: Mobile (≤768px) */
 @media (max-width: 768px) {
     .hamburger-btn {
         display: flex;
@@ -1196,9 +1171,7 @@ body {
     }
 }
 
-/* =====================
-   Responsive: Small Phone (≤480px)
-   ===================== */
+/* Responsive: Small Phone (≤480px) */
 @media (max-width: 480px) {
     .audio-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1221,9 +1194,7 @@ body {
     }
 }
 
-/* =====================
-   Favorites Heart on Card
-   ===================== */
+/* Favorites Heart on Card */
 .fav-btn {
     position: absolute;
     bottom: 10px;
@@ -1250,9 +1221,7 @@ body {
 .fav-player-btn.favorited { color: #e85d5d; }
 .fav-player-btn:active { transform: scale(1.3); }
 
-/* =====================
-   Now Playing Animated Bars
-   ===================== */
+/* Now Playing Animated Bars */
 .track-thumbnail { position: relative; }
 .now-playing-bars {
     position: absolute; inset: 0;
@@ -1280,9 +1249,7 @@ body {
 .player-extra-btn { font-size: 13px; color: var(--text-muted); width: 32px; height: 32px; }
 .player-extra-btn.active { color: var(--accent-gold); }
 
-/* =====================
-   List View Mode
-   ===================== */
+/* List View Mode */
 .audio-grid.list-view { grid-template-columns: 1fr; gap: 4px; }
 .audio-grid.list-view .audio-card { display: flex; align-items: center; gap: 14px; padding: 10px 14px; border-radius: var(--border-radius-sm); }
 .audio-grid.list-view .card-img-container { width: 44px; height: 44px; flex-shrink: 0; margin: 0; aspect-ratio: 1; border-radius: 6px; }
@@ -1292,9 +1259,7 @@ body {
 .audio-grid.list-view .fav-btn { bottom: auto; top: 50%; right: 40px; transform: translateY(-50%); }
 .audio-grid.list-view .card-tags { display: none; }
 
-/* =====================
-   Toast Notifications
-   ===================== */
+/* Toast Notifications */
 .toast {
     position: fixed; bottom: 96px; left: 50%; transform: translateX(-50%) translateY(20px);
     background: #37393b; color: var(--text-primary); padding: 10px 20px;
@@ -1308,9 +1273,7 @@ body {
 .toast.error { border-color: rgba(220,80,80,0.4); color: #ff8080; }
 .toast.info { border-color: rgba(217,170,85,0.4); color: var(--accent-gold); }
 
-/* =====================
-   Keyboard Shortcut Help
-   ===================== */
+/* Keyboard Shortcut Help */
 .kbd-help { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); }
 .kbd-help-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
 .kbd-row { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; margin-left: 2px; }
