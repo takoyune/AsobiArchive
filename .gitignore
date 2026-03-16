@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+npm-debug.log
+npm-debug.log.*
+yarn-error.log
+yarn-debug.log
+
+# Database
+hsr_audio.sqlite
+*.db
+*.sqlite
+*.sqlite3
+
+# Audio Files (Large media)
+audio/
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.production
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optional IDE / Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

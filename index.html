@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSR Audio Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Mobile overlay for sidebar -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i class="fa-solid fa-star logo-icon"></i>
+                    <div>
+                        <h2>Audio Drive</h2>
+                        <span class="brand-sub">HSR Library</span>
+                    </div>
+                </div>
+                <button class="btn-icon sidebar-close-btn" id="sidebar-close-btn">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li class="active" id="nav-home"><i class="fa-solid fa-house"></i> Home</li>
+                    <li id="nav-favorites"><i class="fa-solid fa-heart"></i> Favorites <span class="nav-badge" id="fav-count">0</span></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="filters-section" style="margin-bottom: 20px;">
+                <div class="filters-header">
+                    <h3>Your Libraries</h3>
+                </div>
+                <!-- Games List goes here -->
+                <ul class="library-list" id="game-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <!-- Filters Section in Sidebar -->
+            <div class="filters-section">
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button id="reset-filters" class="btn-text">Reset</button>
+                </div>
+                
+                <div class="filter-group">
+                    <div class="filter-group-header">
+                        <span><i class="fa-solid fa-user"></i> Character</span>
+                        <span class="filter-count" id="char-count">0</span>
+                        <i class="fa-solid fa-chevron-down filter-chevron"></i>
+                    </div>
+                    <div class="filter-group-body">
+                        <div class="filter-search-box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="search-char-filter" placeholder="Search characters...">
+                        </div>
+                        <ul class="filter-list" id="char-list"></ul>
+                    </div>
+                </div>
+
+                <div class="filter-group collapsed">
+                    <div class="filter-group-header">
+                        <span><i class="fa-solid fa-book-open"></i> Chapter</span>
+                        <span class="filter-count" id="chapter-count">0</span>
+                        <i class="fa-solid fa-chevron-down filter-chevron"></i>
+                    </div>
+                    <div class="filter-group-body">
+                        <div class="filter-search-box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="search-chapter-filter" placeholder="Search chapters...">
+                        </div>
+                        <ul class="filter-list" id="chapter-list"></ul>
+                    </div>
+                </div>
+
+                <div class="filter-group collapsed">
+                    <div class="filter-group-header">
+                        <span><i class="fa-solid fa-code-branch"></i> Version</span>
+                        <span class="filter-count" id="version-count">0</span>
+                        <i class="fa-solid fa-chevron-down filter-chevron"></i>
+                    </div>
+                    <div class="filter-group-body">
+                        <div class="filter-search-box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="search-version-filter" placeholder="Search versions...">
+                        </div>
+                        <ul class="filter-list" id="version-list"></ul>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Area -->
+        <div class="main-area">
+            <main class="main-content">
+                <!-- Top Bar -->
+                <header class="top-bar">
+                    <button class="btn-icon hamburger-btn" id="hamburger-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Search tracks, characters, chapters...">
+                        <button class="btn-icon search-clear hidden" id="search-clear" title="Clear">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="top-bar-actions">
+                        <div class="sort-select-wrap">
+                            <i class="fa-solid fa-sort"></i>
+                            <select id="sort-select" title="Sort by">
+                                <option value="default">Default</option>
+                                <option value="title">Title (A-Z)</option>
+                                <option value="character">Character (A-Z)</option>
+                                <option value="title-desc">Title (Z-A)</option>
+                            </select>
+                        </div>
+                        <button class="btn-icon" id="btn-view-toggle" title="Toggle view">
+                            <i class="fa-solid fa-list" id="view-icon"></i>
+                        </button>
+                        <span class="language-tag">JP Dub</span>
+                    </div>
+                </header>
+
+                <!-- Content Body -->
+                <div class="content-body" id="content-body">
+                    <div class="breadcrumb-container" id="breadcrumb">
+                        <span class="crumb active" data-folder="null">Home</span>
+                    </div>
+
+                    <div class="section-header">
+                        <h2 id="current-view-title">Folders</h2>
+                        <span id="track-count"></span>
+                    </div>
+
+                    <div class="folders-grid" id="folders-grid"></div>
+                    <div class="audio-grid" id="audio-grid"></div>
+                    
+                    <div id="no-results" class="no-results hidden">
+                        <i class="fa-solid fa-face-sad-tear"></i>
+                        <p>Nothing found. Try a different search or filter.</p>
+                        <button class="btn-outline" id="clear-all-filters">Clear all filters</button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Bottom Audio Player -->
+            <div class="player-bar">
+                <div class="track-info">
+                    <div class="track-thumbnail" id="player-thumb-wrap">
+                        <img id="player-thumb" src="https://dummyimage.com/60x60/0b0e14/d9aa55.png&text=HSR" onerror="this.onerror=null; this.src='https://dummyimage.com/60x60/0b0e14/d9aa55.png&text=HSR';" alt="Thumbnail">
+                        <div class="now-playing-bars" id="now-playing-bars">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="track-details">
+                        <h4 id="player-title">Select a track</h4>
+                        <p id="player-subtitle">Astral Express</p>
+                    </div>
+                    <button class="btn-icon fav-player-btn" id="fav-player-btn" title="Favorite (F)">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="player-controls">
+                    <div class="control-buttons">
+                        <button class="btn-icon player-extra-btn" id="btn-shuffle" title="Shuffle (S)">
+                            <i class="fa-solid fa-shuffle"></i>
+                        </button>
+                        <button id="btn-prev" class="btn-icon"><i class="fa-solid fa-backward-step"></i></button>
+                        <button id="btn-play" class="btn-play"><i class="fa-solid fa-play"></i></button>
+                        <button id="btn-next" class="btn-icon"><i class="fa-solid fa-forward-step"></i></button>
+                        <button class="btn-icon player-extra-btn" id="btn-repeat" title="Repeat (R)">
+                            <i class="fa-solid fa-repeat"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="progress-bar-container">
+                        <span id="time-current">0:00</span>
+                        <div class="progress-bar-bg" id="progress-bg">
+                            <div class="progress-bar-fill" id="progress-fill"></div>
+                            <div class="progress-bar-thumb" id="progress-thumb"></div>
+                        </div>
+                        <span id="time-total">0:00</span>
+                    </div>
+                </div>
+
+                <div class="extra-controls">
+                    <i class="fa-solid fa-volume-high" id="mute-icon"></i>
+                    <div class="volume-slider-bg" id="volume-bg">
+                        <div class="volume-slider-fill" id="volume-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info / Edit Modal -->
+    <div class="modal-backdrop hidden" id="info-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-circle-info"></i> Track Details</h3>
+                <button class="btn-icon" id="close-modal"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="edit-title" disabled class="input-readonly">
+                </div>
+                <div class="form-group">
+                    <label>Character</label>
+                    <input type="text" id="edit-character" list="character-datalist" placeholder="E.g., Kafka">
+                    <datalist id="character-datalist"></datalist>
+                </div>
+                <div class="form-group">
+                    <label>Tags — click to toggle</label>
+                    <div class="tag-selector" id="edit-tags-container"></div>
+                    <div class="custom-tag-input">
+                        <input type="text" id="custom-tag-name" placeholder="Add custom tag...">
+                        <button class="btn-outline" id="add-custom-tag">Add</button>
+                    </div>
+                </div>
+                <p class="modal-hint"><i class="fa-solid fa-circle-info"></i> Changes save permanently to data.js.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" id="cancel-edit">Cancel</button>
+                <button class="btn-primary" id="save-edit"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="main-audio" style="display: none;" controlsList="nodownload" oncontextmenu="return false;"></audio>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Silent: block right-click save on all audio/video elements
+        document.addEventListener('contextmenu', e => {
+            if (e.target.closest('audio, video, .card-img-container, .track-thumbnail')) {
+                e.preventDefault();
+            }
+        });
+        // Block keyboard shortcut that saves media (Ctrl+S on audio)
+        document.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's' && e.target.tagName === 'AUDIO') {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
